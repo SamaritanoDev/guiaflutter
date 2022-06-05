@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tutoapp/utils/kitcolors.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
-//mport '../utils/kitcolors.dart';
+import '../utils/kitcolors.dart';
 
 class BasicDesignScreen extends StatelessWidget {
   const BasicDesignScreen({Key? key}) : super(key: key);
@@ -28,26 +29,26 @@ class Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               Text(
-                'UserName',
+                '@samaritano.dev',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: colormorado,
                 ),
               ),
               Text(
-                'Job Title',
+                'Desarrollador Flutter',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black45,
+                  color: celestebebe,
                 ),
               ),
             ],
@@ -55,11 +56,11 @@ class Title extends StatelessWidget {
           Expanded(child: Container()),
           const Image(image: AssetImage('assets/icons/card_hearts.png')),
           const Text(
-            '41',
+            '922',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: colormorado,
             ),
           )
         ],
@@ -99,7 +100,7 @@ class CustomButton extends StatelessWidget {
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.black45,
+            color: colormorado,
           ),
         ),
       ],
