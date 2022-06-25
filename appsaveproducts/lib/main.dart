@@ -1,3 +1,4 @@
+import 'package:appsaveproducts/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -10,11 +11,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-      ),
+      initialRoute: 'login',
+      routes: {
+        'login': (context) => const LoginScreen(),
+        'home': (context) => const HomeScreen(),
+      },
+      theme:
+          ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey[300]),
     );
   }
 }
