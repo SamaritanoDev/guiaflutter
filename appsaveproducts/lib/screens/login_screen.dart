@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:appsaveproducts/providers/login_form_provider.dart';
 import 'package:appsaveproducts/ui/ui.dart';
 import 'package:appsaveproducts/widgets/widgets.dart';
@@ -25,7 +27,6 @@ class LoginScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     const SizedBox(height: 10),
-                    
                     ChangeNotifierProvider(
                       create: (_) => LoginFormProvider(),
                       child: const _LoginForm(),
@@ -102,20 +103,29 @@ class _LoginForm extends StatelessWidget {
             ),
             elevation: 0,
             color: Colors.deepPurple,
-            onPressed: () {},
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              child: const Text(
-                'Ingresar',
-                style: TextStyle(color: Colors.white),
+              child: Text(
+                loginForm.isLoading ? 'Cargando...' : 'Iniciar sesión',
+                style: const TextStyle(color: Colors.white),
               ),
             ),
-            onLongPress: () {
-              //todo: login form
-              if (!loginForm.isValidForm()) return;
+            onPressed: loginForm.isLoading
+                ? null
+                : () async {
+                    //desactivar un boton
 
-              Navigator.pushReplacementNamed(context, 'home');
-            },
+                    //esconder el teclado
+                    FocusScope.of(context).unfocus();
+                    //todo: login form
+                    if (!loginForm.isValidForm()) return;
+                    loginForm.isLoading = true;
+
+                    Future.delayed(const Duration(seconds: 2));
+                    loginForm.isLoading = false;
+
+                    Navigator.pushReplacementNamed(context, 'home');
+                  },
           ),
         ],
       ),
