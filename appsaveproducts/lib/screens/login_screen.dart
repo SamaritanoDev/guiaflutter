@@ -48,6 +48,8 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _LoginForm extends StatelessWidget {
+  final Color colormorado = const Color(0xFF5A3761);
+  
   const _LoginForm({Key? key}) : super(key: key);
 
   @override
@@ -102,7 +104,7 @@ class _LoginForm extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             elevation: 0,
-            color: Colors.deepPurple,
+            color: colormorado,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               child: Text(

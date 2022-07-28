@@ -10,12 +10,12 @@ class InputDecorations {
       labelText: labelText,
       labelStyle: const TextStyle(color: Colors.grey),
       prefixIcon: prefixIcon != null
-          ? Icon(prefixIcon, color: Colors.deepPurple)
+          ? Icon(prefixIcon, color: const Color(0XFF5A3761))
           : null,
       enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.deepPurple)),
+          borderSide: BorderSide(color: Color(0XFF5A3761))),
       focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.deepPurple, width: 2)),
+          borderSide: BorderSide(color: Color(0XFF5A3761), width: 2)),
       hintText: hintText,
     );
   }
