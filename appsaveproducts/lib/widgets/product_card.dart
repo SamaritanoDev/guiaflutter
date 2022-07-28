@@ -19,6 +19,7 @@ class ProductCard extends StatelessWidget {
             _BackgroundImage(),
             _ProductDetails(),
             Positioned(top: 0, right: 0, child: _PriceTag()),
+            Positioned(top: 0, left: 0, child: _NotAvailable()),
           ],
         ),
       ),
@@ -36,6 +37,39 @@ class ProductCard extends StatelessWidget {
           ),
         ],
       );
+}
+
+class _NotAvailable extends StatelessWidget {
+  const _NotAvailable({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const Color colorrosapalo = Color(0xFFF3E6D5);
+    const Color colorred = Color(0xFFA11312);
+
+    return Container(
+      width: 100,
+      height: 70,
+      decoration: const BoxDecoration(
+        color: colorred,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(25), bottomRight: Radius.circular(25)),
+      ),
+      child: const FittedBox(
+        fit: BoxFit.contain,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text('No disponible',
+              style: TextStyle(
+                color: colorrosapalo,
+                fontSize: 20,
+              )),
+        ),
+      ),
+    );
+  }
 }
 
 class _PriceTag extends StatelessWidget {
