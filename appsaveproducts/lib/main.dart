@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  final Color colormorado = const Color(0xFF5A3761);
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -18,10 +19,9 @@ class MyApp extends StatelessWidget {
       },
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[300],
-        appBarTheme:
-            const AppBarTheme(elevation: 0, color: Colors.deepPurpleAccent),
-        floatingActionButtonTheme: const FloatingActionButtonThemeData(
-            backgroundColor: Colors.deepPurpleAccent, elevation: 0),
+        appBarTheme: AppBarTheme(elevation: 0, color: colormorado),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: colormorado, elevation: 0),
       ),
     );
   }
