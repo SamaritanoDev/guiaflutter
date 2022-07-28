@@ -18,6 +18,7 @@ class ProductCard extends StatelessWidget {
           children: const [
             _BackgroundImage(),
             _ProductDetails(),
+            Positioned(top: 0, right: 0, child: _PriceTag()),
           ],
         ),
       ),
@@ -35,6 +36,37 @@ class ProductCard extends StatelessWidget {
           ),
         ],
       );
+}
+
+class _PriceTag extends StatelessWidget {
+  final Color coloramarel = const Color(0xFFFFA904);
+  const _PriceTag({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const Color colorrosapalo = Color(0xFFF3E6D5);
+
+    return Container(
+      alignment: Alignment.center,
+      width: 100,
+      height: 70,
+      decoration: BoxDecoration(
+        color: coloramarel,
+        borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(25), bottomLeft: Radius.circular(25)),
+      ),
+      child: const FittedBox(
+        fit: BoxFit.contain,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text('s/.103.99',
+              style: TextStyle(fontSize: 20, color: colorrosapalo)),
+        ),
+      ),
+    );
+  }
 }
 
 class _ProductDetails extends StatelessWidget {
