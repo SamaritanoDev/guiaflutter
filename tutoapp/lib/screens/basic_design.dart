@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tutoapp/utils/kitcolors.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/kitcolors.dart';
@@ -11,7 +12,8 @@ class BasicDesignScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: const [
-          Image(
+          FadeInImage(
+            placeholder: AssetImage('assets/svgs/load.gif'),
             image: AssetImage('assets/images/banner.jpg'),
           ),
           Title(),
@@ -77,9 +79,9 @@ class ButtonSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: const [
-        CustomButton('assets/icons/mail.png', 'Messages'),
+        CustomButton('assets/icons/mail.png', 'Email'),
         CustomButton('assets/icons/education.png', 'Education'),
-        CustomButton('assets/icons/dog.png', 'Favorite mascot'),
+        CustomButton('assets/icons/dog.png', 'Pet'),
       ],
     );
   }
@@ -104,6 +106,18 @@ class CustomButton extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class Svgs extends StatelessWidget {
+  const Svgs({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: SvgPicture.asset('assets/svgs/infinity.svg'),
     );
   }
 }
