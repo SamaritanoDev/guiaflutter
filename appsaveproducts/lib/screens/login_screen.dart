@@ -1,11 +1,11 @@
-// ignore_for_file: sort_child_properties_last
-
 import 'package:appsaveproducts/providers/login_form_provider.dart';
 import 'package:appsaveproducts/ui/ui.dart';
 import 'package:appsaveproducts/widgets/widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../const/mycolors.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ class LoginScreen extends StatelessWidget {
 
 class _LoginForm extends StatelessWidget {
   final Color colormorado = const Color(0xFF5A3761);
-  
+
   const _LoginForm({Key? key}) : super(key: key);
 
   @override
@@ -79,23 +79,29 @@ class _LoginForm extends StatelessWidget {
                   ? null
                   : 'El valor ingresado no puede ser un correo';
             },
+            autovalidateMode: AutovalidateMode.onUserInteraction,
           ),
           const SizedBox(height: 10),
-          TextFormField(
-            autocorrect: false,
-            obscureText: true,
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecorations.authInputDecoration(
-                hintText: '*****',
-                labelText: 'Contraseña',
-                prefixIcon: Icons.lock_outline),
-
-            onChanged: (value) => loginForm.password = value,
-            //validation
-            validator: (value) {
-              return (value != null && value.length >= 8)
-                  ? null
-                  : 'La contraseña debe contener 8 caracteres';
+          Focus(
+            child: TextFormField(
+              autocorrect: false,
+              obscureText: true,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecorations.authInputDecoration(
+                  hintText: '*****',
+                  labelText: 'Contraseña',
+                  prefixIcon: Icons.lock_outline),
+              onChanged: (value) => loginForm.password = value,
+              //validation
+              validator: (value) {
+                if (value == null) return 'Este campo es requerido';
+                return value.length < 8 ? 'Minimo 8 caracteres' : null;
+              },
+            ),
+            onFocusChange: (hasFocus) {
+              if (!hasFocus) {
+                loginForm.isValidForm();
+              }
             },
           ),
           const SizedBox(height: 25),
@@ -104,14 +110,7 @@ class _LoginForm extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             elevation: 0,
-            color: colormorado,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              child: Text(
-                loginForm.isLoading ? 'Cargando...' : 'Iniciar sesión',
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
+            color: ColorsMyApp.primarycolor,
             onPressed: loginForm.isLoading
                 ? null
                 : () async {
@@ -128,6 +127,13 @@ class _LoginForm extends StatelessWidget {
 
                     Navigator.pushReplacementNamed(context, 'home');
                   },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              child: Text(
+                loginForm.isLoading ? 'Cargando...' : 'Iniciar sesión',
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
           ),
         ],
       ),

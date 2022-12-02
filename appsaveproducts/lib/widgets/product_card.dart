@@ -1,3 +1,4 @@
+import 'package:appsaveproducts/const/mycolors.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -46,14 +47,11 @@ class _NotAvailable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color colorrosapalo = Color(0xFFF3E6D5);
-    const Color colorred = Color(0xFFA11312);
-
     return Container(
       width: 100,
       height: 70,
       decoration: const BoxDecoration(
-        color: colorred,
+        color: ColorsMyApp.notavailablecolor,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(25), bottomRight: Radius.circular(25)),
       ),
@@ -63,7 +61,7 @@ class _NotAvailable extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text('No disponible',
               style: TextStyle(
-                color: colorrosapalo,
+                color: ColorsMyApp.tertiarycolor,
                 fontSize: 20,
               )),
         ),
@@ -73,22 +71,19 @@ class _NotAvailable extends StatelessWidget {
 }
 
 class _PriceTag extends StatelessWidget {
-  final Color coloramarel = const Color(0xFFFFA904);
   const _PriceTag({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const Color colorrosapalo = Color(0xFFF3E6D5);
-
     return Container(
       alignment: Alignment.center,
       width: 100,
       height: 70,
-      decoration: BoxDecoration(
-        color: coloramarel,
-        borderRadius: const BorderRadius.only(
+      decoration: const BoxDecoration(
+        color: ColorsMyApp.secondarycolor,
+        borderRadius: BorderRadius.only(
             topRight: Radius.circular(25), bottomLeft: Radius.circular(25)),
       ),
       child: const FittedBox(
@@ -96,7 +91,7 @@ class _PriceTag extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text('s/.103.99',
-              style: TextStyle(fontSize: 20, color: colorrosapalo)),
+              style: TextStyle(fontSize: 20, color: ColorsMyApp.tertiarycolor)),
         ),
       ),
     );
@@ -110,8 +105,6 @@ class _ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color colorrosapalo = Color(0xFFF3E6D5);
-
     return Padding(
       padding: const EdgeInsets.only(right: 50),
       child: Container(
@@ -127,7 +120,7 @@ class _ProductDetails extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: colorrosapalo,
+                color: ColorsMyApp.tertiarycolor,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -135,7 +128,7 @@ class _ProductDetails extends StatelessWidget {
             Text(
               'id for product',
               style: TextStyle(
-                color: colorrosapalo,
+                color: ColorsMyApp.tertiarycolor,
                 fontSize: 15,
               ),
             ),
@@ -146,7 +139,7 @@ class _ProductDetails extends StatelessWidget {
   }
 
   BoxDecoration _buildBoxDecoration() => const BoxDecoration(
-        color: Color(0xFF5A3761),
+        color: ColorsMyApp.primarycolor,
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(25), topRight: Radius.circular(25)),
       );

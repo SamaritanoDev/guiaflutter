@@ -1,10 +1,11 @@
+import 'package:appsaveproducts/const/mycolors.dart';
 import 'package:appsaveproducts/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  final Color colormorado = const Color(0xFF5A3761);
+  final Color colormorado = ColorsMyApp.primarycolor;
   const MyApp({Key? key}) : super(key: key);
 
   @override
