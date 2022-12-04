@@ -1,3 +1,4 @@
+import 'package:appsaveproducts/const/mycolors.dart';
 import 'package:flutter/material.dart';
 
 class AuthBackground extends StatelessWidget {
@@ -63,8 +64,8 @@ class _PurpleBox extends StatelessWidget {
 
   BoxDecoration _purpleBackground() => const BoxDecoration(
         gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 78, 33, 72),
-          Color.fromARGB(184, 59, 6, 37),
+          ColorsMyApp.primarycolor,
+          Color.fromARGB(184, 174, 113, 139),
         ]),
       );
 }

@@ -17,10 +17,13 @@ class MyApp extends StatelessWidget {
       routes: {
         'login': (context) => const LoginScreen(),
         'home': (context) => const HomeScreen(),
+        'product': (context) => const ProductScreen(),
       },
       theme: ThemeData.light().copyWith(
+        useMaterial3: true,
         scaffoldBackgroundColor: Colors.grey[300],
-        appBarTheme: AppBarTheme(elevation: 0, color: colormorado),
+        appBarTheme:
+            const AppBarTheme(elevation: 0, color: ColorsMyApp.primarycolor),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
             backgroundColor: colormorado, elevation: 0),
       ),

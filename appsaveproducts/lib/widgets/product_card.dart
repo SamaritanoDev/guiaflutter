@@ -2,7 +2,6 @@ import 'package:appsaveproducts/const/mycolors.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  final Color colorrosapalo = const Color(0xFFF3E6D5);
   const ProductCard({Key? key}) : super(key: key);
 
   @override
@@ -28,7 +27,7 @@ class ProductCard extends StatelessWidget {
   }
 
   BoxDecoration _cardBorders() => BoxDecoration(
-        color: colorrosapalo,
+        color: ColorsMyApp.tertiarycolor,
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
           BoxShadow(
@@ -61,7 +60,7 @@ class _NotAvailable extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text('No disponible',
               style: TextStyle(
-                color: ColorsMyApp.tertiarycolor,
+                color: ColorsMyApp.optionalcolor,
                 fontSize: 20,
               )),
         ),
@@ -91,7 +90,7 @@ class _PriceTag extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text('s/.103.99',
-              style: TextStyle(fontSize: 20, color: ColorsMyApp.tertiarycolor)),
+              style: TextStyle(fontSize: 20, color: Colors.black)),
         ),
       ),
     );
@@ -120,16 +119,16 @@ class _ProductDetails extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: ColorsMyApp.tertiarycolor,
-                fontSize: 20,
+                color: ColorsMyApp.optionalcolor,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               'id for product',
               style: TextStyle(
-                color: ColorsMyApp.tertiarycolor,
-                fontSize: 15,
+                color: ColorsMyApp.optionalcolor,
+                fontSize: 12,
               ),
             ),
           ],
