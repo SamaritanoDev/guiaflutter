@@ -12,7 +12,7 @@ class Product {
   bool available;
   String name;
   String? picture;
-  int price;
+  double price;
   String? id;
 
   factory Product.fromJson(String str) => Product.fromMap(json.decode(str));

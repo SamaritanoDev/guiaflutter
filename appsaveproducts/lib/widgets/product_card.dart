@@ -1,8 +1,12 @@
 import 'package:appsaveproducts/const/mycolors.dart';
 import 'package:flutter/material.dart';
 
+import '../models/product.dart';
+
 class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key}) : super(key: key);
+  final Product product;
+
+  const ProductCard({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +19,15 @@ class ProductCard extends StatelessWidget {
         decoration: _cardBorders(),
         child: Stack(
           alignment: Alignment.bottomLeft,
-          children: const [
-            _BackgroundImage(),
-            _ProductDetails(),
-            Positioned(top: 0, right: 0, child: _PriceTag()),
-            Positioned(top: 0, left: 0, child: _NotAvailable()),
+          children: [
+            _BackgroundImage(url: product.picture),
+            _ProductDetails(
+              title: product.name,
+              subTitle: product.id!,
+            ),
+            Positioned(top: 0, right: 0, child: _PriceTag(price: product.price,)),
+            if (!product.available)
+              const Positioned(top: 0, left: 0, child: _NotAvailable()),
           ],
         ),
       ),
@@ -70,7 +78,10 @@ class _NotAvailable extends StatelessWidget {
 }
 
 class _PriceTag extends StatelessWidget {
+  final double price;
+  
   const _PriceTag({
+    required this.price,
     Key? key,
   }) : super(key: key);
 
@@ -85,12 +96,12 @@ class _PriceTag extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(25), bottomLeft: Radius.circular(25)),
       ),
-      child: const FittedBox(
+      child: FittedBox(
         fit: BoxFit.contain,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Text('s/.103.99',
-              style: TextStyle(fontSize: 20, color: Colors.black)),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text('\$$price',
+              style: const TextStyle(fontSize: 20, color: Colors.black)),
         ),
       ),
     );
@@ -98,7 +109,12 @@ class _PriceTag extends StatelessWidget {
 }
 
 class _ProductDetails extends StatelessWidget {
+  final String title;
+  final String subTitle;
+  
   const _ProductDetails({
+    required this.title,
+    required this.subTitle,
     Key? key,
   }) : super(key: key);
 
@@ -113,20 +129,20 @@ class _ProductDetails extends StatelessWidget {
         decoration: _buildBoxDecoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             Text(
-              'Name product',
+              title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 color: ColorsMyApp.optionalcolor,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              'id for product',
-              style: TextStyle(
+              subTitle,
+              style: const TextStyle(
                 color: ColorsMyApp.optionalcolor,
                 fontSize: 12,
               ),
@@ -145,21 +161,23 @@ class _ProductDetails extends StatelessWidget {
 }
 
 class _BackgroundImage extends StatelessWidget {
-  final Color colorrosapalo = const Color(0xFFF3E6D5);
+  final String? url;
+
   const _BackgroundImage({
     Key? key,
+    this.url,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(25),
-      child: const SizedBox(
+      child: SizedBox(
         width: double.infinity,
         height: 400,
         child: FadeInImage(
-          placeholder: AssetImage('assets/load.gif'),
-          image: NetworkImage('https://via.placeholder.com/400x300/f6f6f6'),
+          placeholder: const AssetImage('assets/load.gif'),
+          image: NetworkImage(url!),
           fit: BoxFit.cover,
         ),
       ),
