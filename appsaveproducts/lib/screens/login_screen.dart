@@ -27,10 +27,7 @@ class LoginScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     const SizedBox(height: 10),
-                    ChangeNotifierProvider(
-                      create: (_) => LoginFormProvider(),
-                      child: const _LoginForm(),
-                    ),
+                    const _LoginForm()
                   ],
                 ),
               ),
@@ -54,89 +51,92 @@ class _LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginForm = Provider.of<LoginFormProvider>(context);
+    //final loginForm = Provider.of<LoginFormProvider>(context);
 
-    return Form(
-      key: loginForm.formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Column(
-        children: [
-          TextFormField(
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecorations.authInputDecoration(
-                hintText: 'samaritanodev@gmail.com',
-                labelText: 'Correo electrónico',
-                prefixIcon: Icons.alternate_email_sharp),
-
-            onChanged: (value) => loginForm.email = value,
-            //validation
-            validator: (value) {
-              String pattern =
-                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-              RegExp regExp = RegExp(pattern);
-              return regExp.hasMatch(value ?? '')
-                  ? null
-                  : 'El valor ingresado no puede ser un correo';
-            },
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-          ),
-          const SizedBox(height: 10),
-          Focus(
-            child: TextFormField(
+    return Consumer<LoginFormProvider>(builder: (_, loginForm, child) {
+      return Form(
+        key: loginForm.formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Column(
+          children: [
+            TextFormField(
               autocorrect: false,
-              obscureText: true,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoration(
-                  hintText: '*****',
-                  labelText: 'Contraseña',
-                  prefixIcon: Icons.lock_outline),
-              onChanged: (value) => loginForm.password = value,
+                  hintText: 'samaritanodev@gmail.com',
+                  labelText: 'Correo electrónico',
+                  prefixIcon: Icons.alternate_email_sharp),
+
+              onChanged: (value) => loginForm.email = value,
               //validation
               validator: (value) {
-                if (value == null) return 'Este campo es requerido';
-                return value.length < 8 ? 'Minimo 8 caracteres' : null;
+                String pattern =
+                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                RegExp regExp = RegExp(pattern);
+                return regExp.hasMatch(value ?? '')
+                    ? null
+                    : 'El valor ingresado no puede ser un correo';
+              },
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+            ),
+            const SizedBox(height: 10),
+            Focus(
+              child: TextFormField(
+                autocorrect: false,
+                obscureText: true,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecorations.authInputDecoration(
+                    hintText: '*****',
+                    labelText: 'Contraseña',
+                    prefixIcon: Icons.lock_outline),
+                onChanged: (value) => loginForm.password = value,
+                //validation
+                validator: (value) {
+                  if (value == null) return 'Este campo es requerido';
+                  return value.length < 8 ? 'Minimo 8 caracteres' : null;
+                },
+              ),
+              onFocusChange: (hasFocus) {
+                if (!hasFocus) {
+                  loginForm.isValidForm();
+                }
               },
             ),
-            onFocusChange: (hasFocus) {
-              if (!hasFocus) {
-                loginForm.isValidForm();
-              }
-            },
-          ),
-          const SizedBox(height: 25),
-          MaterialButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            elevation: 0,
-            color: ColorsMyApp.primarycolor,
-            onPressed: loginForm.isLoading
-                ? null
-                : () async {
-                    //desactivar un boton
+            const SizedBox(height: 25),
+            MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              elevation: 0,
+              color: ColorsMyApp.primarycolor,
+              onPressed: loginForm.isLoading
+                  ? null
+                  : () async {
+                      //desactivar un boton
 
-                    //esconder el teclado
-                    FocusScope.of(context).unfocus();
-                    //todo: login form
-                    if (!loginForm.isValidForm()) return;
-                    loginForm.isLoading = true;
+                      //esconder el teclado
+                      FocusScope.of(context).unfocus();
+                      //todo: login form
+                      if (!loginForm.isValidForm()) return;
+                      loginForm.isLoading = true;
 
-                    Future.delayed(const Duration(seconds: 2));
-                    loginForm.isLoading = false;
+                      Future.delayed(const Duration(seconds: 2));
+                      loginForm.isLoading = false;
 
-                    Navigator.pushReplacementNamed(context, 'home');
-                  },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              child: Text(
-                loginForm.isLoading ? 'Cargando...' : 'Iniciar sesión',
-                style: const TextStyle(color: Colors.white),
+                      Navigator.pushReplacementNamed(context, 'home');
+                    },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                child: Text(
+                  loginForm.isLoading ? 'Cargando...' : 'Iniciar sesión',
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }

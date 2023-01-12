@@ -42,7 +42,7 @@ class ProductScreen extends StatelessWidget {
           ),
           const _ProductForm(),
           const SizedBox(
-            height: 100,
+            height: 80,
           )
         ]),
       ),
