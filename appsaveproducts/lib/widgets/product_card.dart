@@ -25,7 +25,12 @@ class ProductCard extends StatelessWidget {
               title: product.name,
               subTitle: product.id!,
             ),
-            Positioned(top: 0, right: 0, child: _PriceTag(price: product.price,)),
+            Positioned(
+                top: 0,
+                right: 0,
+                child: _PriceTag(
+                  price: product.price,
+                )),
             if (!product.available)
               const Positioned(top: 0, left: 0, child: _NotAvailable()),
           ],
@@ -79,7 +84,7 @@ class _NotAvailable extends StatelessWidget {
 
 class _PriceTag extends StatelessWidget {
   final double price;
-  
+
   const _PriceTag({
     required this.price,
     Key? key,
@@ -111,7 +116,7 @@ class _PriceTag extends StatelessWidget {
 class _ProductDetails extends StatelessWidget {
   final String title;
   final String subTitle;
-  
+
   const _ProductDetails({
     required this.title,
     required this.subTitle,
@@ -175,11 +180,13 @@ class _BackgroundImage extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: 400,
-        child: FadeInImage(
-          placeholder: const AssetImage('assets/load.gif'),
-          image: NetworkImage(url!),
-          fit: BoxFit.cover,
-        ),
+        child: url == null
+            ? const Image(image: AssetImage('assets/no-image.png'))
+            : FadeInImage(
+                placeholder: const AssetImage('assets/load.gif'),
+                image: NetworkImage(url!),
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }
