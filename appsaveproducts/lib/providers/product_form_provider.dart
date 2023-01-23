@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:appsaveproducts/models/models.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +15,10 @@ class ProductFormProvider extends ChangeNotifier {
   }
 
   bool isValidForm() {
+    print(product.name);
+    print(product.price);
+    print(product.available);
+
     return formkey.currentState?.validate() ?? false;
   }
 }
