@@ -33,6 +33,7 @@ class _ProductsScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(children: [
           Stack(
             children: [
@@ -144,10 +145,14 @@ class _ProductForm extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               SwitchListTile.adaptive(
-                  title: const Text('Disponible'),
-                  activeColor: ColorsMyApp.secondarycolor,
-                  value: product.available,
-                  onChanged: (value) {}),
+                value: product.available,
+                title: const Text('Disponible'),
+                activeColor: ColorsMyApp.secondarycolor,
+                onChanged: (value) => productForm.updateAvailability(value),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
             ],
           ),
         ),
